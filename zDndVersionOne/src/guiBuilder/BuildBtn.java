@@ -41,7 +41,7 @@ public class BuildBtn implements BuildGui<JButton>
 	}
 
 	
-	public JButton buildBtn() {
+	public JButton build() {
 		JButton button = new JButton(text);
 		button.setBounds(x, y, width, height);
 		return button;

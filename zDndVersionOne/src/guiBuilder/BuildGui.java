@@ -7,5 +7,5 @@ public interface BuildGui<T>
 	BuildGui<T> setY(int y);
 	BuildGui<T> setWidth(int width);
 	BuildGui<T> setHeight(int height);
-	T buildBtn();
+	T build();
 }

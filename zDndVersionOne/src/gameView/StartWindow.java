@@ -92,7 +92,7 @@ public class StartWindow
 	
 	private JButton BuildBtnHelper(String text, int x, int y, int width, int height)
 	{
-		JButton button = new BuildBtn().setText(text).setX(x).setY(y).setWidth(width).setHeight(height).buildBtn();
+		JButton button = new BuildBtn().setText(text).setX(x).setY(y).setWidth(width).setHeight(height).build();
 		return button;
 	}
 }

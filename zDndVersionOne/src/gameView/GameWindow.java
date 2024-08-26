@@ -1,13 +1,17 @@
 package gameView;
 
+import gameModel.GameData;
+
 public class GameWindow 
 {
 	private StartWindow startWindow;
 	private CharacterWindow charWindow;
-	public GameWindow()
+	private GameData gameData;
+	public GameWindow(GameData gameData)
 	{
+		this.gameData = gameData;
 		startWindow = new StartWindow();
-		charWindow = new CharacterWindow();
+		charWindow = new CharacterWindow(gameData);
 	}
 	
 	

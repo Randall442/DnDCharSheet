@@ -8,6 +8,6 @@ public enum GameClient {
 	INSTANCE;
 	
 	GameData gameData = new GameData();
-	GameWindow gameWindow = new GameWindow();
+	GameWindow gameWindow = new GameWindow(gameData);
 	GameController gameController = new GameController(gameData, gameWindow);
 }
