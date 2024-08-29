@@ -6,13 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import gameModel.GameData;
-import gameView.GameWindow;
+import gameView.GameView;
 
 public class GameController implements ActionListener
 {
 	private GameData gameData;
-	private GameWindow gameWindow;
-	public GameController(GameData gameData, GameWindow gameWindow)
+	private GameView gameWindow;
+	public GameController(GameData gameData, GameView gameWindow)
 	{
 		this.gameData = gameData;
 		this.gameWindow = gameWindow;
@@ -20,6 +20,7 @@ public class GameController implements ActionListener
 		
 		
 		addListeners();
+		updateDndClass();
 		
 	}
 	
@@ -129,6 +130,9 @@ public class GameController implements ActionListener
 				gameData.setAttributeDex(dex);
 				gameWindow.getCharWindow().updateLbl(dex, 1);
 				
+				int dexMod = updateMod(dex);
+				gameData.setDexMod(dexMod);
+				gameWindow.getCharWindow().updateModLbl(dexMod, 1);
 			}
 		}
 		else if(source == gameWindow.getCharWindow().getAddStat(2))
@@ -139,6 +143,10 @@ public class GameController implements ActionListener
 				++con;
 				gameData.setAttributeCon(con);
 				gameWindow.getCharWindow().updateLbl(con, 2);
+				
+				int conMod = updateMod(con);
+				gameData.setStrMod(conMod);
+				gameWindow.getCharWindow().updateModLbl(conMod, 2);
 			}
 		}
 		else if(source == gameWindow.getCharWindow().getAddStat(3))
@@ -149,6 +157,10 @@ public class GameController implements ActionListener
 				++intel;
 				gameData.setAttributeIntel(intel);
 				gameWindow.getCharWindow().updateLbl(intel, 3);
+				
+				int intelMod = updateMod(intel);
+				gameData.setIntelMod(intelMod);
+				gameWindow.getCharWindow().updateModLbl(intelMod, 3);
 			}
 		}
 		else if(source == gameWindow.getCharWindow().getAddStat(4))
@@ -159,6 +171,10 @@ public class GameController implements ActionListener
 				++wis;
 				gameData.setAttributeWis(wis);
 				gameWindow.getCharWindow().updateLbl(wis, 4);
+				
+				int wisMod = updateMod(wis);
+				gameData.setWisMod(wisMod);
+				gameWindow.getCharWindow().updateModLbl(wisMod, 4);
 			}
 		}
 		else if(source == gameWindow.getCharWindow().getAddStat(5))
@@ -169,6 +185,10 @@ public class GameController implements ActionListener
 				++cha;
 				gameData.setAttributeCha(cha);
 				gameWindow.getCharWindow().updateLbl(cha, 5);
+				
+				int chaMod = updateMod(cha);
+				gameData.setChaMod(chaMod);
+				gameWindow.getCharWindow().updateModLbl(chaMod, 5);
 			}
 		}
 		// adds all the subtraction from stat buttons
@@ -197,6 +217,10 @@ public class GameController implements ActionListener
 				--dex;
 				gameData.setAttributeDex(dex);
 				gameWindow.getCharWindow().updateLbl(dex, 1);
+				
+				int dexMod = updateMod(dex);
+				gameData.setDexMod(dexMod);
+				gameWindow.getCharWindow().updateModLbl(dexMod, 1);
 			}
 		}
 		else if(source == gameWindow.getCharWindow().getSubStat(2))
@@ -208,6 +232,12 @@ public class GameController implements ActionListener
 				--con;
 				gameData.setAttributeCon(con);
 				gameWindow.getCharWindow().updateLbl(con, 2);
+				
+				int conMod = updateMod(con);
+				gameData.setConMod(conMod);
+				gameWindow.getCharWindow().updateModLbl(conMod, 2);
+				
+				
 			}
 		}
 		else if(source == gameWindow.getCharWindow().getSubStat(3))
@@ -219,6 +249,10 @@ public class GameController implements ActionListener
 				--intel;
 				gameData.setAttributeIntel(intel);
 				gameWindow.getCharWindow().updateLbl(intel, 3);
+				
+				int intelMod = updateMod(intel);
+				gameData.setIntelMod(intelMod);
+				gameWindow.getCharWindow().updateModLbl(intelMod, 3);
 			}
 		}
 		else if(source == gameWindow.getCharWindow().getSubStat(4))
@@ -230,6 +264,10 @@ public class GameController implements ActionListener
 				--wis;
 				gameData.setAttributeWis(wis);
 				gameWindow.getCharWindow().updateLbl(wis, 4);
+				
+				int wisMod = updateMod(wis);
+				gameData.setWisMod(wisMod);
+				gameWindow.getCharWindow().updateModLbl(wisMod, 4);
 			}
 		}
 		else if(source == gameWindow.getCharWindow().getSubStat(5))
@@ -241,11 +279,20 @@ public class GameController implements ActionListener
 				--cha;
 				gameData.setAttributeCha(cha);
 				gameWindow.getCharWindow().updateLbl(cha, 5);
+				
+				int chaMod = updateMod(cha);
+				gameData.setChaMod(chaMod);
+				gameWindow.getCharWindow().updateModLbl(chaMod, 5);
 			}
 		}
 		
 	}
-	
+	private void updateDndClass()
+	{	
+		String[] dndClassArray = gameData.getDndClassArray();
+		gameWindow.getCharWindow().setClassArray(dndClassArray);
+		
+	}
 	private int updateMod(int stat)
 	{
 		int mod = (stat - 10) / 2;

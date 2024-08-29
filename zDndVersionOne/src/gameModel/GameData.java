@@ -24,6 +24,15 @@ public class GameData {
 	private final int TWELVE_DICE = 12;
 	private final int TWENTY_DICE = 20;
 	
+	private String[] dndClass = { "Barbarian", "Bard", "Cleric", "Druid",
+								  "Fighter", "Monk", "Paladin", "Ranger",
+								  "Rogue", "Sorcerer","Warlock", "Wizard",
+								  "Artificer" };
+	
+	private String[] dndBackground = {
+	};
+	
+	
 	public GameData()
 	{
 		this.setAttributeStr(attributeStr + startingAttribute);
@@ -164,5 +173,10 @@ public class GameData {
 
 	public void setChaMod(int chaMod) {
 		this.chaMod = chaMod;
+	}
+	
+	public String[] getDndClassArray()
+	{
+		return dndClass;
 	}
 }

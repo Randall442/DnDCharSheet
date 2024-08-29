@@ -2,12 +2,12 @@ package zDndVersionOne;
 
 import gameController.GameController;
 import gameModel.GameData;
-import gameView.GameWindow;
+import gameView.GameView;
 
 public enum GameClient {
 	INSTANCE;
 	
 	GameData gameData = new GameData();
-	GameWindow gameWindow = new GameWindow(gameData);
+	GameView gameWindow = new GameView(gameData);
 	GameController gameController = new GameController(gameData, gameWindow);
 }
