@@ -29,10 +29,10 @@ public class CharacterWindow
 	private String[] attributeNames = {"Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
 	
 	private JComboBox<String> dndClass;
-	private JComboBox<String> playerBackground;
-	private JComboBox<String> playerRace;
-	private JComboBox<String> playerAlignment;
-	private JComboBox<String> playerLevel;
+	private JComboBox<String> dndBackground;
+	private JComboBox<String> dndRace;
+	private JComboBox<String> dndAlignment;
+	private JComboBox<String> dndLevel;
 	
 	private JLabel nameDisplay;
 	private JLabel dndClassDisplay;
@@ -71,9 +71,9 @@ public class CharacterWindow
 	private void initializeBtns()
 	{
 		//creates buttons using a helper method
-		startGameBtn = buildBtnHelper("Start Game", 200, 800, 100, 30);
-		saveBtn = buildBtnHelper("Save Character", 400, 800, 100, 30);
-		loadBtn = buildBtnHelper("Load Character", 600, 800, 100, 30);
+		startGameBtn = buildBtnHelper("Start Game", 200, 700, 100, 30);
+		saveBtn = buildBtnHelper("Save Character", 400, 700, 100, 30);
+		loadBtn = buildBtnHelper("Load Character", 600, 700, 100, 30);
 		backBtn = buildBtnHelper("Back", 800, 800, 100, 30);
 		
 		// using a loop and the helper method to make a set of buttons and add them to the frame
@@ -103,6 +103,8 @@ public class CharacterWindow
 		playerRaceDisplay = buildLblHelper("Race", 400, 150, 100, 30);
 		playerAlignmentDisplay = buildLblHelper("Alignment", 550, 150, 100, 30);
 		playerLevelDisplay = buildLblHelper("Level", 700, 150, 100, 30);
+		
+		
 		
 		for(int i = 0; i < attributeNames.length; i++)
 		{
@@ -140,16 +142,16 @@ public class CharacterWindow
 		//dndClass, playerBackground, playerRace, playerAlignment, playerLevel;
 		
 		dndClass = buildComboHelper(550, 30, 100, 30);
-		playerBackground = buildComboHelper(700, 30, 100, 30);
-		playerRace = buildComboHelper(400, 130, 100, 30);
-		playerAlignment = buildComboHelper(550, 130, 100, 30);
-		playerLevel = buildComboHelper(700, 130, 100, 30);
+		dndBackground = buildComboHelper(700, 30, 100, 30);
+		dndRace = buildComboHelper(400, 130, 100, 30);
+		dndAlignment = buildComboHelper(550, 130, 100, 30);
+		dndLevel = buildComboHelper(700, 130, 100, 30);
 		
 		frame.add(dndClass);
-		frame.add(playerBackground);
-		frame.add(playerRace);
-		frame.add(playerAlignment);
-		frame.add(playerLevel);
+		frame.add(dndBackground);
+		frame.add(dndRace);
+		frame.add(dndAlignment);
+		frame.add(dndLevel);
 		
 	}
 	
@@ -219,8 +221,36 @@ public class CharacterWindow
 		{
 			dndClass.addItem(arr);
 		}
-		
-		
+	}
+	//dndClass, playerBackground, playerRace, playerAlignment, playerLevel;
+	public void setDndBackground(String[] array)
+	{
+		for(String arr: array)
+		{
+			dndBackground.addItem(arr);
+		}
+	}
+	
+	public void setDndRace(String[] array)
+	{
+		for(String arr: array)
+		{
+			dndRace.addItem(arr);
+		}
+	}
+	public void setDndAlignment(String[] array)
+	{
+		for(String arr : array)
+		{
+			dndAlignment.addItem(arr);
+		}
+	}
+	public void setDndLevel(String[] array)
+	{
+		for(String arr : array)
+		{
+			dndLevel.addItem(arr);
+		}
 	}
 	public JButton getAddStat(int num)
 	{

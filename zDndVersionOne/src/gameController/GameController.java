@@ -17,13 +17,15 @@ public class GameController implements ActionListener
 		this.gameData = gameData;
 		this.gameWindow = gameWindow;
 		
-		
-		
 		addListeners();
 		updateDndClass();
+		updateDndBackground();
+		updateDndRace();
+		updateDndAlignment();
+		updateDndLevel();
 		
 	}
-	
+	//not needed
 	public void startGame()
 	{
 		gameWindow.getWindow().showFrame();
@@ -89,7 +91,8 @@ public class GameController implements ActionListener
 		
 		else if(source == gameWindow.getCharWindow().getStartGameBtn())
 		{
-			System.out.println("Hello");
+			gameWindow.getCharWindow().hideWindow();
+			gameWindow.getGameWindow().showFrame();
 		}
 		else if(source == gameWindow.getCharWindow().getLoadBtn()) {
 			System.out.println("Load Character");
@@ -292,6 +295,29 @@ public class GameController implements ActionListener
 		String[] dndClassArray = gameData.getDndClassArray();
 		gameWindow.getCharWindow().setClassArray(dndClassArray);
 		
+	}
+	//dndClass, playerBackground, playerRace, playerAlignment, playerLevel;
+	private void updateDndBackground ()
+	{
+		String[] dndBackgroundArray = gameData.getDndBackground();
+		gameWindow.getCharWindow().setDndBackground(dndBackgroundArray);
+	}
+	
+	private void updateDndRace()
+	{
+		String[] dndRaceArray = gameData.getDndRace();
+		gameWindow.getCharWindow().setDndRace(dndRaceArray);
+	}
+	
+	private void updateDndAlignment()
+	{
+		String[] dndAlignmentArray = gameData.getDndAlignment();
+		gameWindow.getCharWindow().setDndAlignment(dndAlignmentArray);
+	}
+	private void updateDndLevel()
+	{
+		String[] dndLevelArray = gameData.getDndLevel();
+		gameWindow.getCharWindow().setDndLevel(dndLevelArray);
 	}
 	private int updateMod(int stat)
 	{

@@ -1,5 +1,7 @@
 package gameModel;
 
+import java.util.Random;
+
 public class GameData {
 
 	private int attributeTotal;
@@ -17,7 +19,10 @@ public class GameData {
 	private int wisMod;
 	private int chaMod;
 	
+	private int totalPoints;
 	private int startingAttribute = 8;
+	
+	
 	private final int FOUR_DICE = 4;
 	private final int SIX_DICE = 6;
 	private final int TEN_DICE = 10;
@@ -29,10 +34,21 @@ public class GameData {
 								  "Rogue", "Sorcerer","Warlock", "Wizard",
 								  "Artificer" };
 	
-	private String[] dndBackground = {
-	};
+	private String[] dndBackground = { "Acolyte", "Charlatan", "Criminal", 
+									   "Entertainer", "Folk Hero", "Guild Artisan", 
+									   "Noble", "Outlander", "Sage", "Soldier", 
+									   "Urchin"};
+
+	//dndClass, playerBackground, playerRace, playerAlignment, playerLevel;
+	private String[] dndRace = { "Human", "Elf", "Drow", "Half-Elf", "Half-Orc", 
+								 "Halfling", "Dwarf", "Gnome", "Tiefling", "Githyanki",
+								 "Dragonborn"};
 	
+	private String[] dndAlignment = { "Lawful Good", "Neutral Good", "Chaotic Good",
+									  "Lawful Neutral", "True Neutral", "Chaotic Neutral",
+									  "Lawful Evil", "Neutral Evil", "Chaotic Evil",};
 	
+	private String[] dndLevel = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
 	public GameData()
 	{
 		this.setAttributeStr(attributeStr + startingAttribute);
@@ -99,24 +115,35 @@ public class GameData {
 		this.attributeCha = attributeCha;
 	}
 
+	
 	public int getFOUR_DICE() {
-		return FOUR_DICE;
+		Random rand = new Random();
+		int fourDice = rand.nextInt(1, FOUR_DICE);
+		return fourDice;
 	}
 
 	public int getSIX_DICE() {
-		return SIX_DICE;
+		Random rand = new Random();
+		int sixDice = rand.nextInt(1, SIX_DICE);
+		return sixDice;
 	}
 
 	public int getTEN_DICE() {
-		return TEN_DICE;
+		Random rand = new Random();
+		int tenDice = rand.nextInt(1, TEN_DICE);
+		return tenDice;
 	}
 
 	public int getTWELVE_DICE() {
-		return TWELVE_DICE;
+		Random rand = new Random();
+		int twelveDice = rand.nextInt(1, TWELVE_DICE);
+		return twelveDice;
 	}
 
 	public int getTWENTY_DICE() {
-		return TWENTY_DICE;
+		Random rand = new Random();
+		int twentyDice = rand.nextInt(1, TWENTY_DICE);
+		return twentyDice;
 	}
 
 	public int getStartingAttribute() {
@@ -178,5 +205,23 @@ public class GameData {
 	public String[] getDndClassArray()
 	{
 		return dndClass;
+	}
+
+	public String[] getDndBackground() 
+	{
+		return dndBackground;
+	}
+	
+	public String[] getDndRace()
+	{
+		return dndRace;
+	}
+	public String[] getDndAlignment()
+	{
+		return dndAlignment;
+	}
+	public String[] getDndLevel()
+	{
+		return dndLevel;
 	}
 }
