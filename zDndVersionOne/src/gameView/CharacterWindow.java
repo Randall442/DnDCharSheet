@@ -15,17 +15,21 @@ import guiBuilder.BuildTextBox;
 
 public class CharacterWindow 
 {
+	private GameData gameData;
 	//variables
 	private JFrame frame;
 	private JButton saveBtn;
 	private JButton startGameBtn;
 	private JButton backBtn;
 	private JButton loadBtn;
+	private JButton rollStatPoints;
+	private JButton rollHP;
 	private JButton[] addStats;
 	private JButton[] subStats;
+	
+	
+	
 	private String[] statNames = {"Str", "Dex", "Con", "Intel", "Wis", "Cha"};
-	private JLabel[] attributeLbls;
-	private JLabel[] attributeMods; 
 	private String[] attributeNames = {"Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
 	
 	private JComboBox<String> dndClass;
@@ -34,6 +38,8 @@ public class CharacterWindow
 	private JComboBox<String> dndAlignment;
 	private JComboBox<String> dndLevel;
 	
+	private JLabel[] attributeLbls;
+	private JLabel[] attributeMods; 
 	private JLabel nameDisplay;
 	private JLabel dndClassDisplay;
 	private JLabel playerBackgroundDisplay;
@@ -41,11 +47,21 @@ public class CharacterWindow
 	private JLabel playerAlignmentDisplay;
 	private JLabel playerLevelDisplay;
 	
+	private JLabel displayTotalStatPoints;
+	
+	private JLabel displayCurrentHPLbl;
+	private JLabel displayTotalHPLbl;
+	private JLabel currentHitPointsLbl;
+	private JLabel totalHitPointsLbl;
+	
 	private JTextField playerName;
+	
+	
 	
 	
 	public CharacterWindow(GameData gameData)
 	{
+		this.gameData = gameData;
 		//initializing 
 		attributeLbls = new JLabel[6];
 		attributeMods = new JLabel[6];
@@ -71,10 +87,11 @@ public class CharacterWindow
 	private void initializeBtns()
 	{
 		//creates buttons using a helper method
-		startGameBtn = buildBtnHelper("Start Game", 200, 700, 100, 30);
-		saveBtn = buildBtnHelper("Save Character", 400, 700, 100, 30);
-		loadBtn = buildBtnHelper("Load Character", 600, 700, 100, 30);
-		backBtn = buildBtnHelper("Back", 800, 800, 100, 30);
+		startGameBtn = buildBtnHelper("Start Game", 400, 700, 100, 30);
+		saveBtn = buildBtnHelper("Save Character", 500, 700, 100, 30);
+		loadBtn = buildBtnHelper("Load Character", 300, 700, 100, 30);
+		backBtn = buildBtnHelper("Back", 450, 700, 100, 30);
+		rollStatPoints = buildBtnHelper("Roll Stats", 160, 700, 100, 30);
 		
 		// using a loop and the helper method to make a set of buttons and add them to the frame
 		for(int i = 0; i < statNames.length; i++) {
@@ -89,6 +106,8 @@ public class CharacterWindow
 			frame.add(subStats[j]);
 		}
 		// adds buttons to the frame
+		
+		frame.add(rollStatPoints);
 		frame.add(startGameBtn);
 		frame.add(saveBtn);
 		frame.add(backBtn);
@@ -103,7 +122,7 @@ public class CharacterWindow
 		playerRaceDisplay = buildLblHelper("Race", 400, 150, 100, 30);
 		playerAlignmentDisplay = buildLblHelper("Alignment", 550, 150, 100, 30);
 		playerLevelDisplay = buildLblHelper("Level", 700, 150, 100, 30);
-		
+		displayTotalStatPoints = buildLblHelper("Total: ", 50, 700, 100, 30);
 		
 		
 		for(int i = 0; i < attributeNames.length; i++)
@@ -115,16 +134,17 @@ public class CharacterWindow
 		for(int i = 0; i < attributeLbls.length; i++)
 		{
 			
-			attributeLbls[i] = buildLblHelper("8", 160, 100+(i*100), 60,30);
+			attributeLbls[i] = buildLblHelper(String.valueOf(gameData.getStartingAttribute()), 160, 100+(i*100), 60,30);
 			frame.add(attributeLbls[i]);
 		}
 		
 		for(int i = 0; i < attributeMods.length; i++)
 		{
-			attributeMods[i] = buildLblHelper("-1", 160, 120 + (i * 100), 60, 30);
+			attributeMods[i] = buildLblHelper(String.valueOf(gameData.getStartingAttribute() - 5), 160, 120 + (i * 100), 60, 30);
 			frame.add(attributeMods[i]);
 		}
 		//dndClass, playerBackground, playerRace, playerAlignment, playerExperience;
+		frame.add(displayTotalStatPoints);
 		frame.add(nameDisplay);
 		frame.add(dndClassDisplay);
 		frame.add(playerBackgroundDisplay);
@@ -214,6 +234,14 @@ public class CharacterWindow
 	public JButton getBackBtn()
 	{
 		return backBtn;
+	}
+	public JButton getRollStatBtn()
+	{
+		return rollStatPoints;
+	}
+	public JButton getRollHPBtn()
+	{
+		return rollHP;
 	}
 	public void setClassArray(String[] array)
 	{
@@ -359,6 +387,10 @@ public class CharacterWindow
 				attributeMods[5].setText(String.valueOf(stat));
 			break;
 		}
+	}
+	public void updateStatLabel(String text)
+	{
+		displayTotalStatPoints.setText(text);
 	}
 	// method to show the window
 	public void showWindow()

@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class GameData {
 
-	private int attributeTotal;
+	
 	private int attributeStr;
 	private int attributeDex;
 	private int attributeCon;
@@ -19,8 +19,8 @@ public class GameData {
 	private int wisMod;
 	private int chaMod;
 	
-	private int totalPoints;
-	private int startingAttribute = 8;
+	private int attributeTotal = 0;
+	private int startingAttribute = 0;
 	
 	
 	private final int FOUR_DICE = 4;
@@ -28,6 +28,10 @@ public class GameData {
 	private final int TEN_DICE = 10;
 	private final int TWELVE_DICE = 12;
 	private final int TWENTY_DICE = 20;
+	
+	private int currentTile;
+	private int rows;
+	private int cols;
 	
 	private String[] dndClass = { "Barbarian", "Bard", "Cleric", "Druid",
 								  "Fighter", "Monk", "Paladin", "Ranger",
@@ -223,5 +227,29 @@ public class GameData {
 	public String[] getDndLevel()
 	{
 		return dndLevel;
+	}
+
+	public int getCurrentTile() {
+		return currentTile;
+	}
+
+	public void setCurrentTile(int currentTile) {
+		this.currentTile = currentTile;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	public int getCols() {
+		return cols;
+	}
+
+	public void setCols(int cols) {
+		this.cols = cols;
 	}
 }
