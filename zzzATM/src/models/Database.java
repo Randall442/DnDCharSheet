@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import views.AtmWindow;
 
 public class Database {
-	
+	//string to connect to the database
 	private String url = "jdbc:sqlite:./ATMF.db";
 	private AtmWindow window;
 
@@ -20,12 +20,12 @@ public class Database {
 	{
 		setWindow(window);
 	}
-	
+	//checks to make sure there are 5 digits in the text field
 	public boolean isFiveDigits(int number) 
 	{
 		return number >= 10000 && number <= 99999;
 	}
-	  
+	 //connection to the database
 	public Connection getConnection() throws SQLException
 	{
 		Connection conn = null;
@@ -42,9 +42,11 @@ public class Database {
 		
 		return conn;
 	}
+	//checkes to make sure the account number and the pin match whats in the database
 	public boolean authenticate(int accountNumber, int pin) {
+		//query for the database
 		  String query = "SELECT * FROM accounts WHERE account_number = ? AND pin = ?";
-		  
+		  //try catch for prepared statement for data
 		    try (Connection conn = this.getConnection();
 		        PreparedStatement pstmt = conn.prepareStatement(query)) 
 		    {
@@ -63,12 +65,12 @@ public class Database {
 	
    
     public void createUser(int userNum, int pin) {
-    	
+    	//creates the user if the user num and user pin match the digit length
     	 if (!isFiveDigits(userNum) || !isFiveDigits(pin)) {
              JOptionPane.showMessageDialog(window.getFrame(),"Account number and PIN must be exactly 5 digits.", "Input Error", JOptionPane.ERROR_MESSAGE);
              
          }
-    	 
+    	 //creates the users and inserts it into the datyabase
     	String validateSQL = "SELECT COUNT(*) FROM accounts WHERE account_number = ?";
         String insertSQL = "INSERT INTO accounts (account_number, pin, balance) VALUES (?, ?, ?)";
 
@@ -99,6 +101,7 @@ public class Database {
         }
     }
     public void getUsers() {
+    	// query to get the user from the database for logging in
         String sql = "SELECT account_number, pin, balance FROM accounts";
         
         try (Connection conn = this.getConnection();
@@ -116,6 +119,7 @@ public class Database {
     }
     public void deleteUsers(int accountNumber)
     {
+    	//query for deleting users from the database
     	String deleteUserSQL = "DELETE FROM accounts WHERE account_number = ?";
 
     	try (Connection conn = this.getConnection();
@@ -139,9 +143,10 @@ public class Database {
     	}
     }
     
-    public double getBalance(int accountNumber) {
+    public int getBalance(int accountNumber) {
+    	//query for getting the balance of the account
         String sql = "SELECT balance FROM accounts WHERE account_number = ?";
-        double balance = 0.0;  
+        int balance = 0;  
         
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -153,7 +158,7 @@ public class Database {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     
-                    balance = rs.getDouble("balance");
+                    balance = rs.getInt("balance");
                 } else {
                     
                     JOptionPane.showMessageDialog(window.getFrame(),"Account not found for account number: " + accountNumber, "Input Error", JOptionPane.ERROR_MESSAGE);
@@ -167,7 +172,9 @@ public class Database {
         
         return balance; 
     }
-    public void setBalance(int accountNumber, double newBalance) {
+    
+    public void setBalance(int accountNumber, int newBalance) {
+    	//query for updating the balance
         String sql = "UPDATE accounts SET balance = ? WHERE account_number = ?";
         
         try (Connection conn = this.getConnection();
@@ -200,4 +207,5 @@ public class Database {
     {
     	this.window = window;
     }
+    
 }
