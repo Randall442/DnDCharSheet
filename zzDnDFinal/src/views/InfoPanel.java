@@ -111,8 +111,8 @@ public class InfoPanel {
 		}
 	}
 
-	public JComboBox<String> getPlayerAlignmentSelect() {
-		return playerAlignmentSelect;
+	public Integer getPlayerAlignmentSelect() {
+		return playerAlignmentSelect.getSelectedIndex();
 	}
 
 	public void setPlayerAlignmentSelect(List<String> alignments) {

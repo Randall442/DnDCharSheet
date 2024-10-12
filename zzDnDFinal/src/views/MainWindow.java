@@ -13,9 +13,8 @@ public class MainWindow {
 
 	private AttributePanel attributes;
 	private InfoPanel information;
-	private JButton saveCharacter;
-	private JButton loadCharacter;
-	private JButton exitApplication;
+	private LoadCharacterPanel loadCharacterPanel;
+	
 	
 	
 	public MainWindow()
@@ -28,12 +27,18 @@ public class MainWindow {
 		
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
+		
 		attributes = new AttributePanel();
 		information = new InfoPanel();
+		loadCharacterPanel = new LoadCharacterPanel();
 		
 		mainPanel.add(attributes.getAttributePanel(), BorderLayout.WEST);
 		mainPanel.add(information.getInformationPanel(), BorderLayout.NORTH);
-	
+		mainPanel.add(loadCharacterPanel.getCharPanel(), BorderLayout.EAST);
+		
+		
+		
+		
 	    mainWindow.add(mainPanel, BorderLayout.CENTER);
 	        
 		mainWindow.setResizable(false);
@@ -70,5 +75,17 @@ public class MainWindow {
 	public InfoPanel getInfoPanel()
 	{
 		return information;
+	}
+	public LoadCharacterPanel loadCharacterPanel()
+	{
+		return loadCharacterPanel;
+	}
+	public JButton getSaveCharBtn()
+	{
+		return loadCharacterPanel.getSaveBtn();
+	}
+	public JButton getLoadCharBtn()
+	{
+		return loadCharacterPanel.getLoadBtn();
 	}
 }

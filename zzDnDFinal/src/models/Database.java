@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Database
 	private List<String> backgrounds;
 	private List<String> races;
 	private List<String> playerClasses;
+	private List<String> charNames;
 	
 	public Database()
 	{
@@ -63,6 +65,8 @@ public class Database
 		
 		return alignments;
 	}
+	
+	
 	public List<String> getAllBackgrounds()
 	{
 		backgrounds = new ArrayList<>();
@@ -86,6 +90,8 @@ public class Database
 		
 		return backgrounds;
 	}
+	
+	
 	public List<String> getAllRaces()
 	{
 		races = new ArrayList<>();
@@ -109,6 +115,8 @@ public class Database
 		
 		return races;
 	}
+	
+	
 	public List<String> getAllClasses()
 	{
 		playerClasses = new ArrayList<>();
@@ -132,6 +140,8 @@ public class Database
 		
 		return playerClasses;
 	}
+	
+	
 	public void createCharacter(String name, int level, int backgroundID, int raceID, int alignmentID, int classID, 
             int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, 
             int hitPoints, int armorClass, int speed, int initiative)
@@ -168,5 +178,57 @@ public class Database
      } catch (SQLException e) {
          System.out.println(e.getMessage());
      }
+	}
+	
+	public List<String> getCharacterNames() {
+		charNames = new ArrayList<>();
+		
+		String query = "Select name From Character";
+		
+		 try (Connection conn = this.getConnection();
+	             PreparedStatement stmt = conn.prepareStatement(query);
+	             ResultSet rs = stmt.executeQuery()) {
+
+	           
+	            while (rs.next()) {
+	                String name = rs.getString("Name");
+	                races.add(name); 
+	            }
+	            System.out.println(rs);
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+		
+		return charNames;
+    }
+
+	private void getCharacterInfo()
+	{
+        
+    }
+	
+	public String getOneName(int id)
+	{
+		String name = null;
+		String query = "Select Name From Character WHERE CharacterID = ?";
+		
+		 try (Connection conn = this.getConnection();
+	             PreparedStatement stmt = conn.prepareStatement(query))
+		 {
+
+	           stmt.setInt(1,  id);
+	           
+	           ResultSet rs = stmt.executeQuery();
+	           
+	           if(rs.next()) {
+	        	   name = rs.getString("Name");
+	           }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+		
+		return name;
 	}
 }

@@ -3,6 +3,7 @@ package zzDnDFinal;
 import controllers.AttributeController;
 import controllers.InfoController;
 import controllers.MainController;
+import controllers.SaveLoadController;
 import models.Database;
 import views.MainWindow;
 
@@ -15,5 +16,6 @@ public enum AppClient {
 	MainController controller = new MainController(db, window);
 	AttributeController statController = new AttributeController(db, window);
 	InfoController infoController = new InfoController(db, window);
+	SaveLoadController saveLoadController = new SaveLoadController(db, window);
 	
 }
