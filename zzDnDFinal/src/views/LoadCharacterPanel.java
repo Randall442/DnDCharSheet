@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -8,6 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import models.Database;
 
 public class LoadCharacterPanel {
 
@@ -16,7 +21,6 @@ public class LoadCharacterPanel {
 	private JButton saveBtn;
 	private DefaultListModel<String> listModel;
 	private JPanel loadCharPanel;
-	
 	
 	public LoadCharacterPanel()
 	{
@@ -28,6 +32,7 @@ public class LoadCharacterPanel {
 		saveBtn = new JButton("Save Character");
 		
 		characterList = new JList<>(listModel);
+	
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
@@ -38,14 +43,18 @@ public class LoadCharacterPanel {
 		GridBagConstraints gbcThree = new GridBagConstraints();
 		gbcThree.gridx = 0;
 		gbcThree.gridy = 2;
+		
 		JScrollPane characters = new JScrollPane (characterList);
+		characters.setPreferredSize(new Dimension(200, 150));
 		
 		loadCharPanel.setLayout(new GridBagLayout());
 		
 		loadCharPanel.add(characters, gbc);
 		loadCharPanel.add(saveBtn, gbcTwo);
 		loadCharPanel.add(loadBtn, gbcThree);
+		
 	}
+	
 	public JPanel getCharPanel()
 	{
 		return loadCharPanel;
@@ -66,4 +75,16 @@ public class LoadCharacterPanel {
 	{
 		listModel.add(index, text);
 	}
+	
+	public JList<String> getCharacterList()
+	{
+		return characterList;
+	}
+
+	public int getListIndex()
+	{
+		return characterList.getSelectedIndex();
+	}
+	
 }
+

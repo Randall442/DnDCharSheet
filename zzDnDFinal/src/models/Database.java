@@ -20,6 +20,18 @@ public class Database
 	private List<String> playerClasses;
 	private List<String> charNames;
 	
+	 private String name;
+	 private String className;
+	 private String alignment;
+	 private String background;
+	 private String race;
+	 private int strength;
+	 private int dexterity;
+	 private int constitution;
+	 private int intelligence;
+	 private int wisdom;
+	 private int charisma;
+	
 	public Database()
 	{
 		
@@ -203,10 +215,45 @@ public class Database
 		return charNames;
     }
 
-	private void getCharacterInfo()
+	public void getCharInfo(int num)
 	{
+		String sql = "Select Name, classname, alignmentname, backgroundname, racename, strength, dexterity, "
+				+ "constitution, intelligence, wisdom, charisma From Character "
+				+ "inner join alignment on character.alignmentid = alignment.alignmentid "
+				+ "inner join background on character.backgroundid = background.backgroundid "
+				+ "inner join race on character.raceid = race.raceid "
+				+ "inner join class on character.classid = class.classid "
+				+ "WHERE CharacterID = ?";
+		
+     try (Connection conn = this.getConnection();
+          PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+         
+         stmt.setInt(1, num);         
+           
+         ResultSet rs = stmt.executeQuery();
+         
+         if(rs.next())
+         {
+        	setName(rs.getString("Name"));
+            setClassName(rs.getString("classname"));
+            setAlignment(rs.getString("alignmentname"));
+            setBackground(rs.getString("backgroundname"));
+            setRace(rs.getString("racename"));
+            setStrength(rs.getInt("strength"));
+            setDexterity(rs.getInt("dexterity"));
+            setConstitution(rs.getInt("constitution"));
+            setIntelligence(rs.getInt("intelligence"));
+            setWisdom(rs.getInt("wisdom"));
+            setCharisma(rs.getInt("charisma"));
+         }
         
-    }
+         System.out.println("Character loaded successfully");
+
+     } catch (SQLException e) {
+         System.out.println(e.getMessage());
+     }
+	}
 	
 	public String getOneName(int id)
 	{
@@ -230,5 +277,93 @@ public class Database
 	        }
 		
 		return name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	public String getAlignment() {
+		return alignment;
+	}
+
+	public void setAlignment(String alignment) {
+		this.alignment = alignment;
+	}
+
+	public String getBackground() {
+		return background;
+	}
+
+	public void setBackground(String background) {
+		this.background = background;
+	}
+
+	public String getRace() {
+		return race;
+	}
+
+	public void setRace(String race) {
+		this.race = race;
+	}
+
+	public int getStrength() {
+		return strength;
+	}
+
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
+
+	public int getDexterity() {
+		return dexterity;
+	}
+
+	public void setDexterity(int dexterity) {
+		this.dexterity = dexterity;
+	}
+
+	public int getConstitution() {
+		return constitution;
+	}
+
+	public void setConstitution(int constitution) {
+		this.constitution = constitution;
+	}
+
+	public int getIntelligence() {
+		return intelligence;
+	}
+
+	public void setIntelligence(int intelligence) {
+		this.intelligence = intelligence;
+	}
+
+	public int getWisdom() {
+		return wisdom;
+	}
+
+	public void setWisdom(int wisdom) {
+		this.wisdom = wisdom;
+	}
+
+	public int getCharisma() {
+		return charisma;
+	}
+
+	public void setCharisma(int charisma) {
+		this.charisma = charisma;
 	}
 }

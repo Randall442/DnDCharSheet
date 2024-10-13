@@ -43,4 +43,5 @@ public class InfoController {
 		window.getInfoPanel().setPlayerAlignmentSelect(alignments);
 	}
 	
+	
 }

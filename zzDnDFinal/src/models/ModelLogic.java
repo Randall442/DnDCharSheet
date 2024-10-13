@@ -2,7 +2,7 @@ package models;
 
 public class ModelLogic {
 
-	
+	private ModelLogic logic;
 	private String charName;
 	private int charLevel;
 	private int charBackground;
@@ -127,4 +127,5 @@ public class ModelLogic {
 	public void setTotalStatPoints(int totalStatPoints) {
 		this.totalStatPoints = totalStatPoints;
 	}
+	
 }

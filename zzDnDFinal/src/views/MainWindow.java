@@ -14,7 +14,7 @@ public class MainWindow {
 	private AttributePanel attributes;
 	private InfoPanel information;
 	private LoadCharacterPanel loadCharacterPanel;
-	
+	private CharacterWindow characterWindow;
 	
 	
 	public MainWindow()
@@ -22,7 +22,7 @@ public class MainWindow {
 		mainWindow = new JFrame("Main Window");
 		mainWindow.setLayout(new BorderLayout());
 		
-		mainWindow.setSize(800, 600);
+		mainWindow.setSize(1000, 1000);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel mainPanel = new JPanel();
@@ -31,10 +31,11 @@ public class MainWindow {
 		attributes = new AttributePanel();
 		information = new InfoPanel();
 		loadCharacterPanel = new LoadCharacterPanel();
+		characterWindow = new CharacterWindow();
 		
 		mainPanel.add(attributes.getAttributePanel(), BorderLayout.WEST);
 		mainPanel.add(information.getInformationPanel(), BorderLayout.NORTH);
-		mainPanel.add(loadCharacterPanel.getCharPanel(), BorderLayout.EAST);
+		mainPanel.add(loadCharacterPanel.getCharPanel(), BorderLayout.SOUTH);
 		
 		
 		
@@ -87,5 +88,9 @@ public class MainWindow {
 	public JButton getLoadCharBtn()
 	{
 		return loadCharacterPanel.getLoadBtn();
+	}
+	public CharacterWindow getCharacterWindow()
+	{
+		return characterWindow;
 	}
 }

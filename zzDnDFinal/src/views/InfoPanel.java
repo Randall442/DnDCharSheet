@@ -89,8 +89,8 @@ public class InfoPanel {
 	{
 		return infoPanel;
 	}
-	public JComboBox<String> getPlayerBackgroundSelect() {
-		return playerBackgroundSelect;
+	public int getPlayerBackgroundSelect() {
+		return playerBackgroundSelect.getSelectedIndex();
 	}
 
 	public void setPlayerBackgroundSelect(List<String> backgrounds) {
@@ -100,8 +100,8 @@ public class InfoPanel {
 		}
 	}
 
-	public JComboBox<String> getPlayerRaceSelect() {
-		return playerRaceSelect;
+	public int getPlayerRaceSelect() {
+		return playerRaceSelect.getSelectedIndex();
 	}
 
 	public void setPlayerRaceSelect(List<String > races) {
@@ -111,7 +111,7 @@ public class InfoPanel {
 		}
 	}
 
-	public Integer getPlayerAlignmentSelect() {
+	public int getPlayerAlignmentSelect() {
 		return playerAlignmentSelect.getSelectedIndex();
 	}
 
@@ -129,6 +129,10 @@ public class InfoPanel {
 			playerClassSelect.addItem(playerClass);
 		}
 	}
+	public int getPlayerClassSelect()
+	{
+		return playerClassSelect.getSelectedIndex();
+	}
 	public JComboBox<String> getPlayerLevelSelect() {
 		return playerLevelSelect;
 	}
@@ -137,8 +141,8 @@ public class InfoPanel {
 		this.playerLevelSelect = playerLevelSelect;
 	}
 
-	public void setPlayerNameInput(JTextField playerNameInput) {
-		this.playerNameInput = playerNameInput;
+	public String getPlayerNameInput() {
+		return playerNameInput.getText();
 	}
 
 	
