@@ -71,9 +71,9 @@ public class LoadCharacterPanel {
 	{
 		return listModel;
 	}
-	public void setListModel(int index, String text)
+	public void setListModel(int num, String text)
 	{
-		listModel.add(index, text);
+		listModel.add(num, text);
 	}
 	
 	public JList<String> getCharacterList()

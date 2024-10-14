@@ -5,7 +5,9 @@ import java.awt.CardLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class MainWindow {
 	
@@ -26,6 +28,7 @@ public class MainWindow {
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel mainPanel = new JPanel();
+		JPanel bugPanel = knownBugs();
 		mainPanel.setLayout(new BorderLayout());
 		
 		attributes = new AttributePanel();
@@ -36,7 +39,7 @@ public class MainWindow {
 		mainPanel.add(attributes.getAttributePanel(), BorderLayout.WEST);
 		mainPanel.add(information.getInformationPanel(), BorderLayout.NORTH);
 		mainPanel.add(loadCharacterPanel.getCharPanel(), BorderLayout.SOUTH);
-		
+		mainPanel.add(bugPanel, BorderLayout.EAST);
 		
 		
 		
@@ -44,6 +47,23 @@ public class MainWindow {
 	        
 		mainWindow.setResizable(false);
 		mainWindow.setVisible(true);
+	}
+	
+	private JPanel knownBugs()
+	{
+		JPanel panel = new JPanel();
+		JTextArea area = new JTextArea();
+		area.setText("BUG LIST \n"
+				+ "1. Modifiers do not work atm.\n 2. Saving a character requires a "
+				+ "restart to show the newly created character in the window list. \n"
+				+ "3. Can enter an empty character name. "
+				+ "4. Levels are not implemented.");
+		
+						
+								
+		panel.add(area);
+	
+		return panel;
 	}
 	
 	public JFrame getWindow()
@@ -58,7 +78,7 @@ public class MainWindow {
 	{
 		return attributes.getSubBtns();
 	}
-	public String[] getStatNum()
+	public int[] getStatNum()
 	{
 		return attributes.getStatNum();
 	}
@@ -66,7 +86,7 @@ public class MainWindow {
 	{
 		
 	}
-	public String[] getStatModNum()
+	public int[] getStatModNum()
 	{
 		return attributes.getStatModNum();
 	}

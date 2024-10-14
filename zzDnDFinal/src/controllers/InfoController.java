@@ -3,14 +3,15 @@ package controllers;
 import java.util.List;
 
 import models.Database;
+import models.ModelLogic;
 import views.MainWindow;
 
 public class InfoController {
 	
 	private Database db;
 	private MainWindow window;
-	
-	public InfoController(Database db, MainWindow window)
+	private ModelLogic logic;
+	public InfoController(Database db, MainWindow window, ModelLogic logic)
 	{
 		this.db = db;
 		this.window = window;

@@ -15,9 +15,8 @@ public class AttributePanel
 	
 	private JPanel attributePanel;
 	
-	private String[] statNum = {"8", "8",  "8", "8", "8", "8"};
-	private String[] statModNum = {"0", "0", "0", "0", "0", "0"};
-	private int totalStatPoints;
+	private int[] statNum = {0, 0,  0, 0, 0, 0};
+	private int[] statModNum = {0, 0, 0, 0, 0, 0};
 	private JButton[] addBtns = new JButton[6];
 	private JButton[] subBtns  = new JButton[6];
 	private Map<String, JLabel> statLblMap = new HashMap<>();
@@ -30,7 +29,7 @@ public class AttributePanel
 		attributePanel = new JPanel();
 		attributePanel.setLayout(new GridBagLayout());
 		
-		totalStatPoints = 27;
+		
 		
 		String[] attributeNames = {"Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
 		createStatLbls(attributeNames);
@@ -54,8 +53,8 @@ public class AttributePanel
 			
 			JLabel stat = new JLabel(statName);
 		
-			JLabel statMod = new JLabel(statModNum[i]);
-			JLabel statLbl = new JLabel(statNum[i]);
+			JLabel statMod = new JLabel(String.valueOf(statModNum[i]));
+			JLabel statLbl = new JLabel(String.valueOf(statNum[i]));
 			
 			getStatLblMap().put(statName, statLbl);
 			statValueMap.put(statName, 0);
@@ -80,7 +79,7 @@ public class AttributePanel
 		
 		gbcTotal.gridx = 2;
 		gbcTotal.gridy = 19;
-		totalStats = new JLabel("Total Points: " + String.valueOf(totalStatPoints));
+		totalStats = new JLabel();
 		attributePanel.add(totalStats, gbcTotal);
 	}
 	
@@ -112,15 +111,27 @@ public class AttributePanel
 		}
 	}
 	
-	public String[] getStatNum()
+	public int[] getStatNum()
 	{
 		return statNum;
 	}
-	public void setStatNum(String[] statNum)
+	public void setStatNum(int[] statNum)
 	{
 		this.statNum = statNum;
+		
+		String[] attributeNames = {"Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
+	    
+		for (int i = 0; i < attributeNames.length; i++) 
+	    {
+	        JLabel statLabel = statLblMap.get(attributeNames[i]);
+	        
+	        if (statLabel != null) 
+	        {
+	            statLabel.setText(String.valueOf(statNum[i]));  
+	        }
+	    }
 	}
-	public String[] getStatModNum()
+	public int[] getStatModNum()
 	{
 		return statModNum;
 	}
@@ -152,12 +163,26 @@ public class AttributePanel
 	public void setStatLblMap(Map<String, JLabel> statLblMap) {
 		this.statLblMap = statLblMap;
 	}
-	public int getTotalStatPoints()
-	{
-		return totalStatPoints;
-	}
+	
 	public void setTotalStatPoints(int totalStatPoints)
 	{
-		this.totalStatPoints = totalStatPoints;
+		this.totalStats.setText("Total Points: " + String.valueOf(totalStatPoints));
 	}
+	public int[] getStatModifiers()
+	{
+		return statModNum;
+		
+	}
+	public void setStatModifiers(int[] statModNum)
+	{
+		this.statModNum = statModNum;
+		
+		String[] attributeNames = {"Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
+	    
+		for (int i = 0; i < attributeNames.length; i++) 
+	    {
+	        
+	    }
+	}
+	
 }

@@ -7,18 +7,20 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import models.Database;
+import models.ModelLogic;
 import views.MainWindow;
 
 public class MainController implements ActionListener {
 	
 	private Database db;
+	private ModelLogic logic;
 	private MainWindow window;
 	private JButton[] addBtns;
-	public MainController(Database db, MainWindow window)
+	public MainController(Database db, MainWindow window, ModelLogic logic)
 	{
 		this.db = db;
+		this.logic = logic;
 		this.window = window;
-		
 		
 	}
 	
